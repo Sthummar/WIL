@@ -10,8 +10,8 @@ import pickle
 with open('logistic_regression_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
-# Initialize the scaler
-scaler = StandardScaler()
+with open('scaler.pkl', 'rb') as scaler_file:
+    scaler = pickle.load(scaler_file)
 
 # Streamlit app
 st.title("Voter Behavior Prediction")
