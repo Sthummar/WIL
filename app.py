@@ -56,8 +56,9 @@ input_data = pd.DataFrame(input_dict)
 scaled_data = scaler.transform(input_data)
 
 # Make predictions
-prediction = model.predict(scaled_data)
-predicted_label = "Will Vote" if prediction[0] == 1 else "Will Not Vote"
+if st.button("Predict Vote Intention"):
+    prediction = model.predict(scaled_data)
+    predicted_label = "Will Vote" if prediction[0] == 1 else "Will Not Vote"
 
-# Display the prediction
-st.write(f"Prediction: {predicted_label}")
+    # Display the prediction
+    st.write(f"Prediction: {predicted_label}")
