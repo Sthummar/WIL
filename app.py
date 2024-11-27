@@ -16,13 +16,17 @@ st.write("Enter the features to predict the vote intention.")
 
 # Create input fields
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
-income = st.number_input("Income (USD)", min_value=0, value=50000)
+income = st.selectbox("Income", options=["Low", "Medium", "High"], index=1)
+
+income_mapping = {"Low": 0, "Medium": 1, "High": 2}
+income_value = income_mapping[income]
+
 social_media_engagement = st.number_input("Social Media Engagement", min_value=0, value=50)
 positive_sentiment_posts = st.number_input("Positive Sentiment Posts", min_value=0, value=10)
 negative_sentiment_posts = st.number_input("Negative Sentiment Posts", min_value=0, value=5)
 
 # Prepare input data for prediction
-features = np.array([[age, income, social_media_engagement, positive_sentiment_posts, negative_sentiment_posts]])
+features = np.array([[age, income_value, social_media_engagement, positive_sentiment_posts, negative_sentiment_posts]])
 
 # Scale the features
 features_scaled = scaler.fit_transform(features)
