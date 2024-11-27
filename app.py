@@ -10,8 +10,8 @@ import pickle
 with open('logistic_regression_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
-with open('scaler.pkl', 'rb') as scaler_file:
-    scaler = pickle.load(scaler_file)
+# Initialize the scaler
+scaler = StandardScaler()
 
 # Streamlit app
 st.title("Voter Behavior Prediction")
@@ -32,29 +32,32 @@ negative_sentiment_posts = st.number_input("Negative Sentiment Posts", min_value
 if st.button("Predict"):
     # Create a DataFrame for input
     input_data = pd.DataFrame({
-        'age': [age],
-        'social_media_engagement': [social_media_engagement],
-        'positive_sentiment_posts': [positive_sentiment_posts],
-        'negative_sentiment_posts': [negative_sentiment_posts],
-        'gender_Female': [1 if gender == "Female" else 0],
-        'gender_Non-binary': [1 if gender == "Non-binary" else 0],
-        'education_Bachelor\'s': [1 if education == "Bachelor's" else 0],
-        'education_Master\'s': [1 if education == "Master's" else 0],
-        'education_PhD': [1 if education == "PhD" else 0],
-        'income_Medium': [1 if income == "Medium" else 0],
-        'income_High': [1 if income == "High" else 0],
-        'location_Rural': [1 if location == "Rural" else 0],
-        'location_Suburban': [1 if location == "Suburban" else 0],
-        'past_voting_behavior_Non-voter': [1 if past_voting_behavior == "Non-voter" else 0]
+        "age": [age],
+    "social_media_engagement": [social_media_engagement],
+    "positive_sentiment_posts": [positive_sentiment_posts],
+    "negative_sentiment_posts": [negative_sentiment_posts],
+    "gender_Male": [1 if gender == "Male" else 0],
+    "gender_Non-binary": [1 if gender == "Non-binary" else 0],
+    "education_High School": [1 if education == "High School" else 0],
+    "education_Master's": [1 if education == "Master's" else 0],
+    "education_PhD": [1 if education == "PhD" else 0],
+    "income_Low": [1 if income == "Low" else 0],
+    "income_Medium": [1 if income == "Medium" else 0],
+    "location_Suburban": [1 if location == "Suburban" else 0],
+    "location_Urban": [1 if location == "Urban" else 0],
+    "past_voting_behavior_Non-voter": [1 if past_voting_behavior == "Non-voter" else 0],
+    "past_voting_behavior_Occasional Voter": [1 if past_voting_behavior == "Occasional Voter" else 0]
     })
 
     expected_columns = [
     'age', 'social_media_engagement', 'positive_sentiment_posts', 'negative_sentiment_posts',
-    'gender_Female', 'gender_Non-binary', 'education_Bachelor\'s', 'education_Master\'s',
-    'education_PhD', 'income_Medium', 'income_High', 'location_Suburban', 'location_Rural',
-    'past_voting_behavior_Non-voter'
+    'gender_Male', 'gender_Non-binary', 'education_High School', "education_Master's",
+    'education_PhD','income_Low', 'income_Medium', 'location_Suburban', 'location_Urban',
+    'past_voting_behavior_Non-voter','past_voting_behavior_Occasional Voter'
     ]
     input_data = input_data.reindex(columns=expected_columns, fill_value=0)
+
+
     # Scale the input data
     scaled_data = scaler.transform(input_data)
 
