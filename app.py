@@ -16,17 +16,20 @@ scaler = StandardScaler()
 # Streamlit app
 st.title("Voter Behavior Prediction")
 
-# Input fields for user data
+# Streamlit input fields
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
-
-gender = st.selectbox("Gender", ["Male", "Female", "Non-binary"])
-education = st.selectbox("Education Level", ["High School", "Bachelor's", "Master's", "PhD"])
-income = st.selectbox("Income Level", ["Low", "Medium", "High"])
-location = st.selectbox("Location", ["Urban", "Rural", "Suburban"])
-past_voting_behavior = st.selectbox("Past Voting Behavior", ["Voter", "Non-voter"])
-social_media_engagement = st.slider("Social Media Engagement", min_value=0, max_value=100, value=50)
+social_media_engagement = st.number_input("Social Media Engagement", min_value=0, value=50)
 positive_sentiment_posts = st.number_input("Positive Sentiment Posts", min_value=0, value=10)
 negative_sentiment_posts = st.number_input("Negative Sentiment Posts", min_value=0, value=5)
+
+gender = st.selectbox("Gender", options=["Male", "Female", "Non-binary"])
+education = st.selectbox("Education Level", options=["High School", "Bachelor's", "Master's", "PhD"])
+income = st.selectbox("Income Level", options=["Low", "Medium", "High"])
+location = st.selectbox("Location", options=["Urban", "Suburban", "Rural"])
+past_voting_behavior = st.selectbox(
+    "Past Voting Behavior",
+    options=["Non-voter", "Occasional Voter", "Regular Voter"]
+)
 
 # Button to make predictions
 if st.button("Predict"):
