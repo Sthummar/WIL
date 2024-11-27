@@ -28,7 +28,7 @@ income = st.selectbox("Income Level", options=["Low", "Medium", "High"])
 location = st.selectbox("Location", options=["Urban", "Suburban", "Rural"])
 past_voting_behavior = st.selectbox(
     "Past Voting Behavior",
-    options=["Non-voter", "Occasional Voter", "Regular Voter"]
+    options=["Non-voter", "Occasional Voter", "Consistent Voter"]
 )
 
 input_dict = {
