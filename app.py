@@ -48,6 +48,13 @@ if st.button("Predict"):
         'past_voting_behavior_Non-voter': [1 if past_voting_behavior == "Non-voter" else 0]
     })
 
+    expected_columns = [
+    'age', 'social_media_engagement', 'positive_sentiment_posts', 'negative_sentiment_posts',
+    'gender_Female', 'gender_Non-binary', 'education_Bachelor\'s', 'education_Master\'s',
+    'education_PhD', 'income_Medium', 'income_High', 'location_Suburban', 'location_Rural',
+    'past_voting_behavior_Non-voter'
+    ]
+    input_data = input_data.reindex(columns=expected_columns, fill_value=0)
     # Scale the input data
     scaled_data = scaler.transform(input_data)
 
