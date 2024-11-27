@@ -31,11 +31,8 @@ past_voting_behavior = st.selectbox(
     options=["Non-voter", "Occasional Voter", "Regular Voter"]
 )
 
-# Button to make predictions
-if st.button("Predict"):
-    # Create a DataFrame for input
-    input_data = pd.DataFrame({
-        "age": [age],
+input_dict = {
+    "age": [age],
     "social_media_engagement": [social_media_engagement],
     "positive_sentiment_posts": [positive_sentiment_posts],
     "negative_sentiment_posts": [negative_sentiment_posts],
@@ -49,16 +46,10 @@ if st.button("Predict"):
     "location_Suburban": [1 if location == "Suburban" else 0],
     "location_Urban": [1 if location == "Urban" else 0],
     "past_voting_behavior_Non-voter": [1 if past_voting_behavior == "Non-voter" else 0],
-    "past_voting_behavior_Occasional Voter": [1 if past_voting_behavior == "Occasional Voter" else 0]
-    })
+    "past_voting_behavior_Occasional Voter": [1 if past_voting_behavior == "Occasional Voter" else 0],
+}
 
-    expected_columns = [
-    'age', 'social_media_engagement', 'positive_sentiment_posts', 'negative_sentiment_posts',
-    'gender_Male', 'gender_Non-binary', 'education_High School', "education_Master's",
-    'education_PhD','income_Low', 'income_Medium', 'location_Suburban', 'location_Urban',
-    'past_voting_behavior_Non-voter','past_voting_behavior_Occasional Voter'
-    ]
-    input_data = input_data.reindex(columns=expected_columns, fill_value=0)
+input_data = pd.DataFrame(input_dict)
 
 
     # Scale the input data
